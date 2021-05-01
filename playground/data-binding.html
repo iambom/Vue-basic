@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
+        <p>{{ doubleNum }}</p>
+        <div v-if="loading">Loading...</div>
+        <div v-else>Test user has been logged in</div>
+        <div v-show="loading">Loading...</div>
+
+        <input type="text" v-model="message">
+        <p>{{ message }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 뷰 디렉티브는 화면에서 표현되는 텍스트 뿐 아니라 DOM 정보까지 Reactive 하게 변경해주어 기존 자바스크립트와 같이 querySelector를 이용해 그 때 그 때 처리해주지 않아도 된다.
+        // v-if else는 DOM은 남아있지 않지만 v-show는 css를 이용해 display:none으로 처리해 DOM에는 남아 있다.
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: 'abc1234',
+                name: 'text-blue',
+                loading: true,
+                message: '',
+
+            },
+            // computed : data의 값에 따라 바뀌는 값을 가져올 수 있는 속성
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            },
+        })
+    </script>
+</body>
+</html>
